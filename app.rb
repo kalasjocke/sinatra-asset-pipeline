@@ -1,5 +1,4 @@
 require 'sinatra'
-require 'haml'
 
 class App < Sinatra::Base
   helpers do

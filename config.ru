@@ -1,4 +1,6 @@
-require 'sprockets'
+require 'bundler'
+Bundler.require
+
 require './assets/stylesheets/bourbon/lib/bourbon'
 require './app'
 
