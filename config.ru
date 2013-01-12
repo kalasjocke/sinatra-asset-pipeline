@@ -10,6 +10,11 @@ map '/assets' do
   environment.append_path 'assets/javascripts'
   environment.append_path 'assets/stylesheets'
 
+  Sprockets::Helpers.configure do |config|
+    config.environment = environment
+    config.digest = true
+  end
+
   run environment
 end
 
