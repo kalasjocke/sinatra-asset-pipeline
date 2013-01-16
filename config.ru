@@ -17,6 +17,10 @@ map '/assets' do
     config.digest = true
   end
 
+  App.class_eval do
+    helpers Sprockets::Helpers
+  end
+
   run environment
 end
 
