@@ -5,6 +5,11 @@ require './app'
 
 use Rack::Deflater
 
+if ENV["RACK_ENV"] == "development"
+  require 'rack-livereload'
+  use Rack::LiveReload
+end
+
 map '/assets' do
   environment = Sprockets::Environment.new
 
