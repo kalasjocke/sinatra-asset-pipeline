@@ -1,5 +1,6 @@
 require './app'
 
 guard 'livereload' do
-  watch(%r{views/.+\.haml$})
+  watch(%r{views/(.+)})
+  watch(%r{assets/(.+)})
 end
