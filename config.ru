@@ -25,6 +25,4 @@ map '/assets' do
   run environment
 end
 
-map '/' do
-  run App
-end
+run App
