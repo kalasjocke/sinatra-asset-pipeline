@@ -3,7 +3,7 @@ source :rubygems
 gem 'sinatra'
 gem 'haml'
 gem 'sass'
-gem 'bourbon'
+gem 'compass'
 gem 'coffee-script'
 gem 'sprockets'
 gem 'sprockets-sass'

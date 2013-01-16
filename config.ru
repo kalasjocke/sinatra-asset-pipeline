@@ -1,7 +1,6 @@
 require 'bundler'
 Bundler.require
 
-require './assets/stylesheets/bourbon/lib/bourbon'
 require './app'
 
 use Rack::Deflater
