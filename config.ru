@@ -8,9 +8,10 @@ use Rack::Deflater
 
 map '/assets' do
   environment = Sprockets::Environment.new
-  environment.append_path 'assets/images'
-  environment.append_path 'assets/javascripts'
-  environment.append_path 'assets/stylesheets'
+
+  %w{images javascripts stylesheets}.each do |thing|
+    environment.append_path "assets/#{thing}"
+  end
 
   Sprockets::Helpers.configure do |config|
     config.environment = environment
