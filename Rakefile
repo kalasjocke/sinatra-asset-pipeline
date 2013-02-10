@@ -13,13 +13,8 @@ namespace :assets do
 
     t.environment = App.sprockets
     t.output = App.assets_path
-    t.assets = %w{
-      app.css
-      app.js
-      *.png
-      *.jpg
-    }
     t.logger = logger
+    t.assets = App.assets_precompile
   end
 
   task :clean do
