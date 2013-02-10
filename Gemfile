@@ -11,6 +11,6 @@ gem 'sprockets-helpers'
 
 group :development do
   gem 'rb-fsevent'
-  gem "guard-livereload"
-  gem "rack-livereload"
+  gem 'guard-livereload'
+  gem 'rack-livereload'
 end
