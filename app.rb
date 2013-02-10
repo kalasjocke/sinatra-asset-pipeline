@@ -4,18 +4,21 @@ Bundler.require
 module Sinatra
   module AssetPipeline
     def self.registered(app)
-      app.set :sprockets, Sprockets::Environment.new
-      app.set :assets_prefix, '/assets'
-      app.set :assets_path, -> { File.join(public_folder, assets_prefix) }
-      app.set :static, true
-      app.set :static_cache_control, [:public, :max_age => 525600]
+      app.set_default :sprockets, Sprockets::Environment.new
+      app.set_default :assets_precompile, %w(app.js app.css *.png *.jpg)
+      app.set_default :assets_prefix, 'assets'
+      app.set_default :assets_path, -> { File.join(public_folder, assets_prefix) }
+      app.set_default :assets_digest, true
+      app.set_default :assets_protocol, 'http'
+      app.set_default :static, true
+      app.set_default :static_cache_control, [:public, :max_age => 525600]
 
       app.configure do
         Dir[File.join app.assets_prefix, "*"].each {|path| app.sprockets.append_path path}
 
         Sprockets::Helpers.configure do |config|
           config.environment = app.sprockets
-          config.digest = true
+          config.digest = App.assets_digest
         end
       end
 
@@ -27,8 +30,8 @@ module Sinatra
 
       app.configure :production do
         Sprockets::Helpers.configure do |config|
-          config.protocol = 'http'
-          config.asset_host = 'id.cloudfront.net'
+          config.protocol = App.assets_protocol
+          config.asset_host = App.assets_host if App.respond_to? :assets_host
         end
       end
 
@@ -43,7 +46,11 @@ module Sinatra
         end
       end
     end
-  end
+
+    def set_default(key, default)
+      self.set(key, default) unless App.respond_to? key
+    end
+ end
 end
 
 class App < Sinatra::Base
