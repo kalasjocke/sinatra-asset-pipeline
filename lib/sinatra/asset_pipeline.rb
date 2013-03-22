@@ -8,10 +8,10 @@ module Sinatra
       app.set_default :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff)
       app.set_default :assets_prefix, 'assets'
       app.set_default :assets_path, -> { File.join(public_folder, assets_prefix) }
-      app.set_default :assets_digest, true
       app.set_default :assets_protocol, 'http'
 
       app.set :static, true
+      app.set :assets_digest, true
       app.set :static_cache_control, [:public, :max_age => 525600]
 
       app.configure do
