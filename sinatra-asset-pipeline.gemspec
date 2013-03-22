@@ -18,6 +18,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'sinatra'
   gem.add_dependency 'haml'
   gem.add_dependency 'sass'
-  gem.add_dependency 'compass'
   gem.add_dependency 'coffee-script'
 end
