@@ -12,12 +12,12 @@ Gem::Specification.new do |gem|
   gem.homepage = "https://github.com/kalasjocke/sinatra-asset-pipeline"
 
   gem.files = Dir["README.md", "lib/**/*.rb"]
+  gem.add_dependency 'sprockets'
+  gem.add_dependency 'sprockets-sass'
+  gem.add_dependency 'sprockets-helpers'
   gem.add_dependency 'sinatra'
   gem.add_dependency 'haml'
   gem.add_dependency 'sass'
   gem.add_dependency 'compass'
   gem.add_dependency 'coffee-script'
-  gem.add_dependency 'sprockets'
-  gem.add_dependency 'sprockets-sass'
-  gem.add_dependency 'sprockets-helpers'
 end
