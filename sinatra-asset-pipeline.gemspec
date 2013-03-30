@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.version = Sinatra::AssetPipeline::VERSION
   gem.authors = ["Joakim Ekberg"]
   gem.email = ["jocke.ekberg@gmail.com"]
-  gem.description = "An asset pipeline implementation for Sinatra based on Sprockets."
+  gem.description = "An asset pipeline implementation for Sinatra based on Sprockets with support for SASS, CoffeeScript and ERB."
   gem.summary = "An asset pipeline implementation for Sinatra."
   gem.homepage = "https://github.com/kalasjocke/sinatra-asset-pipeline"
 
