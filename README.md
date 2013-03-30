@@ -1,6 +1,6 @@
 # sinatra-asset-pipeline
 
-An asset pipeline implementation for Sinatra based on Sprockets including HAML, SASS and CoffeeScript support.
+An asset pipeline implementation for Sinatra based on Sprockets with support for SASS, CoffeeScript and ERB. Built upon [sprockets-sass](https://github.com/petebrowne/sprockets-sass) and [sprockets-helpers](https://github.com/petebrowne/sprockets-helpers) from [petebrowne](https://github.com/petebrowne).
 
 # Installation
 
