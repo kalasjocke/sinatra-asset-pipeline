@@ -62,8 +62,8 @@ However, if your application doesn't follow the defaults you can customize it as
       # Serve assets using this protocol
       set :assets_protocol, :http
 
-        # Where are the assets located
-        set :assets_prefix, 'assets'
+      # Compress CSS using SASS
+      set :assets_sass_style, :compress
 
       register Sinatra::AssetPipeline
 

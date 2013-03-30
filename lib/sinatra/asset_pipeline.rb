@@ -1,4 +1,5 @@
 require 'sprockets'
+require 'sprockets-sass'
 require 'sprockets-helpers'
 
 module Sinatra
@@ -8,7 +9,8 @@ module Sinatra
       app.set_default :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff)
       app.set_default :assets_prefix, 'assets'
       app.set_default :assets_path, -> { File.join(public_folder, assets_prefix) }
-      app.set_default :assets_protocol, 'http'
+      app.set_default :assets_protocol, :http
+      app.set_default :assets_sass_style, :compressed
 
       app.set :static, true
       app.set :assets_digest, true
@@ -30,6 +32,7 @@ module Sinatra
       end
 
       app.configure :production do
+        Sprockets::Sass.options[:style] = :compressed
         Sprockets::Helpers.configure do |config|
           config.protocol = App.assets_protocol
           config.asset_host = App.assets_host if App.respond_to? :assets_host
