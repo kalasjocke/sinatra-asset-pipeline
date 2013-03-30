@@ -43,28 +43,34 @@ In it's most simple form you just register the Sinatra::AssetPipe Sinatra extens
       end
     end
 
-However, if you want to be more fancy, you can customize almost all aspects of sinatra-asset-pipeline. Here is a more elaborate example.
+However, if your application doesn't follow the defaults you can customize it as follows:
 
-      Bundler.require
+    Bundler.require
 
-      require 'sinatra/asset_pipeline'
+    require 'sinatra/asset_pipeline'
 
-      class App < Sinatra::Base
-        register Sinatra::AssetPipeline
+    class App < Sinatra::Base
+      # Include these files when precompiling assets
+      set :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff)
 
-        # Which files should be included in the precompile
-        set :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff)
+      # Logical path to your assets
+      set :assets_prefix, 'assets'
+
+      # Use another host for serving assets
+      set :asset_host, 'http://<id>.cloudfront.net'
+
+      # Serve assets using this protocol
+      set :assets_protocol, :http
 
         # Where are the assets located
         set :assets_prefix, 'assets'
 
-        # Which protocol should we use to serve assets
-        set :assets_protocol, 'http'
+      register Sinatra::AssetPipeline
 
-        get '/' do
-          haml :index
-        end
+      get '/' do
+        haml :index
       end
+    end
 
 Now when everything is in place you can use all helpers provided by [sprockets-helpers](https://github.com/petebrowne/sprockets-helpers), here is a small example:
 
