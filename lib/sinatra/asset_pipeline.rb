@@ -21,21 +21,21 @@ module Sinatra
 
         Sprockets::Helpers.configure do |config|
           config.environment = app.sprockets
-          config.digest = App.assets_digest
+          config.digest = app.assets_digest
         end
       end
 
       app.configure :staging, :production do
         Sprockets::Helpers.configure do |config|
-          config.manifest = Sprockets::Manifest.new(app.sprockets, App.assets_path)
+          config.manifest = Sprockets::Manifest.new(app.sprockets, app.assets_path)
         end
       end
 
       app.configure :production do
         Sprockets::Sass.options[:style] = :compressed
         Sprockets::Helpers.configure do |config|
-          config.protocol = App.assets_protocol
-          config.asset_host = App.assets_host if App.respond_to? :assets_host
+          config.protocol = app.assets_protocol
+          config.asset_host = app.assets_host if app.respond_to? :assets_host
         end
       end
 
@@ -52,7 +52,7 @@ module Sinatra
     end
 
     def set_default(key, default)
-      self.set(key, default) unless App.respond_to? key
+      self.set(key, default) unless self.respond_to? key
     end
   end
 end
