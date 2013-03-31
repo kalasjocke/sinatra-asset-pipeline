@@ -78,3 +78,7 @@ Now when everything is in place you can use all helpers provided by [sprockets-h
         background-image: image-url('cat.png');
       }
 
+# Compass integration
+
+Given that we're using [sprockets-sass](https://github.com/petebrowne/sprockets-sass) we have out of the box support for compass. Just include the compass gem in your Gemfile and include the compass mixins in your app.css.scss file.
+
