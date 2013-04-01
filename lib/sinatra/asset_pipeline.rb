@@ -10,7 +10,8 @@ module Sinatra
       app.set_default :assets_prefix, 'assets'
       app.set_default :assets_path, -> { File.join(public_folder, assets_prefix) }
       app.set_default :assets_protocol, :http
-      app.set_default :assets_sass_style, :compressed
+      app.set_default :assets_css_compressor, :none
+      app.set_default :assets_js_compressor, :none
 
       app.set :static, true
       app.set :assets_digest, true
@@ -32,7 +33,9 @@ module Sinatra
       end
 
       app.configure :production do
-        Sprockets::Sass.options[:style] = :compressed
+        app.sprockets.css_compressor = app.assets_css_compressor unless app.assets_css_compressor == :none
+        app.sprockets.js_compressor = app.assets_js_compressor unless app.assets_js_compressor == :none
+
         Sprockets::Helpers.configure do |config|
           config.protocol = app.assets_protocol
           config.asset_host = app.assets_host if app.respond_to? :assets_host

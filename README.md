@@ -62,8 +62,11 @@ However, if your application doesn't follow the defaults you can customize it as
       # Serve assets using this protocol
       set :assets_protocol, :http
 
-      # Compress CSS using SASS
-      set :assets_sass_style, :compress
+      # CSS minification
+      set :assets_css_compressor, :sass
+
+      # JavaScript minification
+      set :assets_js_minification, :uglifier
 
       register Sinatra::AssetPipeline
 
@@ -77,6 +80,33 @@ Now when everything is in place you can use all helpers provided by [sprockets-h
       body {
         background-image: image-url('cat.png');
       }
+
+# CSS and JavaScript minification
+
+If you would like to use CSS and/or JavaScript minification make sure to require the gems needed in your `Gemfile`.
+
+<table>
+  <tr>
+    <th>Minifier</th>
+    <th>Gem</th>
+  </tr>
+  <tr>
+    <td>:sass</td>
+    <td>sass</td>
+  </tr>
+  <tr>
+    <td>:closure</td>
+    <td>closure-compiler</td>
+  </tr>
+  <tr>
+    <td>:uglifier</td>
+    <td>uglifier</td>
+  </tr>
+  <tr>
+    <td>:yui</td>
+    <td>yui-compressor</td>
+  </tr>
+</table>
 
 # Compass integration
 
