@@ -1,6 +1,6 @@
 # sinatra-asset-pipeline
 
-An asset pipeline implementation for Sinatra based on Sprockets with support for SASS, CoffeeScript and ERB. Built upon [sprockets-sass](https://github.com/petebrowne/sprockets-sass) and [sprockets-helpers](https://github.com/petebrowne/sprockets-helpers) from [petebrowne](https://github.com/petebrowne).
+An asset pipeline implementation for Sinatra based on [Sprockets](https://github.com/sstephenson/sprockets) with support for CoffeeScript, SASS, SCSS, LESS, ERB as well as CSS (SASS, YUI) and JavaScript (uglifier, YUI or Closure) minification.
 
 # Installation
 
@@ -21,11 +21,11 @@ Make sure to add the sinatra-asset-pipeline Rake task in your applications Rakef
 
 Now, when everything is in place you can precompile assets with:
 
-    rake assets:precompile
+    $ rake assets:precompile
 
 And remove old compiled assets with:
 
-    rake assets:clean
+    $ rake assets:clean
 
 # Example
 
