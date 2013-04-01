@@ -1,6 +1,6 @@
 # sinatra-asset-pipeline
 
-An asset pipeline implementation for Sinatra based on [Sprockets](https://github.com/sstephenson/sprockets) with support for CoffeeScript, SASS, SCSS, LESS, ERB as well as CSS (SASS, YUI) and JavaScript (uglifier, YUI or Closure) minification.
+An asset pipeline implementation for Sinatra based on [Sprockets](https://github.com/sstephenson/sprockets) with support for CoffeeScript, SASS, SCSS, LESS, ERB as well as CSS (SASS, YUI) and JavaScript (uglifier, YUI, Closure) minification.
 
 # Installation
 
@@ -12,7 +12,7 @@ Or include it in your project's Gemfile with Bundler:
 
     gem 'sinatra-asset-pipeline'
 
-Make sure to add the sinatra-asset-pipeline Rake task in your applications Rakefile:
+Make sure to add the sinatra-asset-pipeline Rake task in your applications `Rakefile`:
 
     require 'sinatra/asset_pipeline/task.rb'
     require './app'
@@ -29,7 +29,7 @@ And remove old compiled assets with:
 
 # Example
 
-In it's most simple form you just register the Sinatra::AssetPipe Sinatra extension within your Sinatra app.
+In it's most simple form you just register the `Sinatra::AssetPipe` Sinatra extension within your Sinatra app.
 
     Bundler.require
 
@@ -81,7 +81,7 @@ Now when everything is in place you can use all helpers provided by [sprockets-h
         background-image: image-url('cat.png');
       }
 
-# CSS and JavaScript minification
+### CSS and JavaScript minification
 
 If you would like to use CSS and/or JavaScript minification make sure to require the gems needed in your `Gemfile`.
 
@@ -108,7 +108,7 @@ If you would like to use CSS and/or JavaScript minification make sure to require
   </tr>
 </table>
 
-# Compass integration
+### Compass integration
 
-Given that we're using [sprockets-sass](https://github.com/petebrowne/sprockets-sass) we have out of the box support for compass. Just include the compass gem in your Gemfile and include the compass mixins in your app.css.scss file.
+Given that we're using [sprockets-sass](https://github.com/petebrowne/sprockets-sass) we have out of the box support for compass. Just include the compass gem in your `Gemfile` and include the compass mixins in your `app.css.scss` file.
 
