@@ -6,80 +6,96 @@ An asset pipeline implementation for Sinatra based on [Sprockets](https://github
 
 Install sinatra-asset-pipeline from RubyGems:
 
-    $ gem install sinatra-asset-pipeline
+```bash
+$ gem install sinatra-asset-pipeline
+```
 
 Or include it in your project's Gemfile with Bundler:
 
-    gem 'sinatra-asset-pipeline'
+```ruby
+gem 'sinatra-asset-pipeline'
+```
 
 Make sure to add the sinatra-asset-pipeline Rake task in your applications `Rakefile`:
 
-    require 'sinatra/asset_pipeline/task.rb'
-    require './app'
+```ruby
+require 'sinatra/asset_pipeline/task.rb'
+require './app'
 
-    Sinatra::AssetPipeline::Task.define! App
+Sinatra::AssetPipeline::Task.define! App
+```
 
 Now, when everything is in place you can precompile assets with:
 
-    $ rake assets:precompile
+```bash
+$ rake assets:precompile
+```
 
 And remove old compiled assets with:
 
-    $ rake assets:clean
+```bash
+$ rake assets:clean
+```
 
 # Example
 
 In it's most simple form you just register the `Sinatra::AssetPipe` Sinatra extension within your Sinatra app.
 
-    Bundler.require
+```ruby
+Bundler.require
 
-    require 'sinatra/asset_pipeline'
+require 'sinatra/asset_pipeline'
 
-    class App < Sinatra::Base
-      register Sinatra::AssetPipeline
+class App < Sinatra::Base
+  register Sinatra::AssetPipeline
 
-      get '/' do
-        haml :index
-      end
-    end
+  get '/' do
+    haml :index
+  end
+end
+```
 
 However, if your application doesn't follow the defaults you can customize it as follows:
 
-    Bundler.require
+```ruby
+Bundler.require
 
-    require 'sinatra/asset_pipeline'
+require 'sinatra/asset_pipeline'
 
-    class App < Sinatra::Base
-      # Include these files when precompiling assets
-      set :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff)
+class App < Sinatra::Base
+  # Include these files when precompiling assets
+  set :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff)
 
-      # Logical path to your assets
-      set :assets_prefix, 'assets'
+  # Logical path to your assets
+  set :assets_prefix, 'assets'
 
-      # Use another host for serving assets
-      set :asset_host, 'http://<id>.cloudfront.net'
+  # Use another host for serving assets
+  set :asset_host, 'http://<id>.cloudfront.net'
 
-      # Serve assets using this protocol
-      set :assets_protocol, :http
+  # Serve assets using this protocol
+  set :assets_protocol, :http
 
-      # CSS minification
-      set :assets_css_compressor, :sass
+  # CSS minification
+  set :assets_css_compressor, :sass
 
-      # JavaScript minification
-      set :assets_js_minification, :uglifier
+  # JavaScript minification
+  set :assets_js_minification, :uglifier
 
-      register Sinatra::AssetPipeline
+  register Sinatra::AssetPipeline
 
-      get '/' do
-        haml :index
-      end
-    end
+  get '/' do
+    haml :index
+  end
+end
+```
 
 Now when everything is in place you can use all helpers provided by [sprockets-helpers](https://github.com/petebrowne/sprockets-helpers), here is a small example:
 
-      body {
-        background-image: image-url('cat.png');
-      }
+```scss
+body {
+  background-image: image-url('cat.png');
+}
+```
 
 ### CSS and JavaScript minification
 
