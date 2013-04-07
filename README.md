@@ -39,7 +39,7 @@ $ rake assets:clean
 
 # Example
 
-In it's most simple form you just register the `Sinatra::AssetPipe` Sinatra extension within your Sinatra app.
+In it's most simple form you just register the `Sinatra::AssetPipeline` Sinatra extension within your Sinatra app.
 
 ```ruby
 Bundler.require
