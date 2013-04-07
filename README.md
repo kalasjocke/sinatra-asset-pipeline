@@ -79,7 +79,7 @@ class App < Sinatra::Base
   set :assets_css_compressor, :sass
 
   # JavaScript minification
-  set :assets_js_minification, :uglifier
+  set :assets_js_compressor, :uglifier
 
   register Sinatra::AssetPipeline
 
