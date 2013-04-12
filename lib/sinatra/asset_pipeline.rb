@@ -51,6 +51,9 @@ module Sinatra
           end
 		  asset = app.sprockets[key]
           content_type asset.content_type
+		  if Sprockets::Helpers.expand
+		  	return asset.body
+		  end
           asset.to_s
         end
       end
