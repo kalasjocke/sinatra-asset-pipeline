@@ -12,9 +12,11 @@ module Sinatra
       app.set_default :assets_protocol, :http
       app.set_default :assets_css_compressor, :none
       app.set_default :assets_js_compressor, :none
+      app.set_default :assets_digest, true
+      app.set_default :assets_expand, false
+      app.set_default :assets_debug, false
 
       app.set :static, true
-      app.set :assets_digest, true
       app.set :static_cache_control, [:public, :max_age => 525600]
 
       app.configure do
@@ -23,6 +25,11 @@ module Sinatra
         Sprockets::Helpers.configure do |config|
           config.environment = app.sprockets
           config.digest = app.assets_digest
+          config.expand = app.assets_expand
+          if app.assets_debug
+            config.digest = false
+            config.expand = true
+          end
         end
       end
 
@@ -46,9 +53,14 @@ module Sinatra
 
       app.configure :development do
         app.get '/assets/*' do |key|
-          key.gsub! /(-\w+)(?!.*-\w+)/, ""
-          asset = app.sprockets[key]
+          if Sprockets::Helpers.digest
+          	key.gsub! /(-\w+)(?!.*-\w+)/, ""
+          end
+		  asset = app.sprockets[key]
           content_type asset.content_type
+		  if Sprockets::Helpers.expand
+		  	return asset.body
+		  end
           asset.to_s
         end
       end
