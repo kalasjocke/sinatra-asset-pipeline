@@ -10,7 +10,10 @@ module Sinatra
           desc "Precompile assets"
           task :precompile do
             environment = app.sprockets
-            manifest = Sprockets::Manifest.new(:production, app.assets_path)
+            environment.css_compressor = app.assets_css_compressor unless app.assets_css_compressor == :none
+            environment.js_compressor = app.assets_js_compressor unless app.assets_js_compressor == :none
+
+            manifest = Sprockets::Manifest.new(environment, app.assets_path)
             manifest.compile(app.assets_precompile)
           end
 
