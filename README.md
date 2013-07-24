@@ -70,7 +70,7 @@ class App < Sinatra::Base
   set :assets_prefix, 'assets'
 
   # Use another host for serving assets
-  set :asset_host, 'http://<id>.cloudfront.net'
+  set :assets_host, '<id>.cloudfront.net'
 
   # Serve assets using this protocol
   set :assets_protocol, :http
