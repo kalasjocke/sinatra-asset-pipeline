@@ -10,7 +10,7 @@ module Sinatra
           desc "Precompile assets"
           task :precompile do
             environment = app.sprockets
-            manifest = Sprockets::Manifest.new(environment.index, app.assets_path)
+            manifest = ::Sprockets::Manifest.new(environment.index, app.assets_path)
             manifest.compile(app.assets_precompile)
           end
 
