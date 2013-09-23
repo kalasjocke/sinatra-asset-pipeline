@@ -15,7 +15,7 @@ module Sinatra
 
       app.set :static, true
       app.set :assets_digest, true
-      app.set :static_cache_control, [:public, :max_age => 525600]
+      app.set :static_cache_control, [:public, :max_age => 60 * 60 * 24 * 365]
 
       app.configure do
         Dir[File.join app.assets_prefix, "*"].each {|path| app.sprockets.append_path path}
