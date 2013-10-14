@@ -7,8 +7,8 @@ module Sinatra
     def self.registered(app)
       app.set_default :sprockets, Sprockets::Environment.new
       app.set_default :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff)
-      app.set_default :assets_prefix, 'assets'
-      app.set_default :assets_path, -> { File.join(public_folder, assets_prefix) }
+      app.set_default :assets_prefix, %w[assets vendor/assets]
+      app.set_default :assets_path, -> { File.join(public_folder, "assets") }
       app.set_default :assets_protocol, :http
       app.set_default :assets_css_compressor, :none
       app.set_default :assets_js_compressor, :none
@@ -18,8 +18,9 @@ module Sinatra
       app.set :static_cache_control, [:public, :max_age => 60 * 60 * 24 * 365]
 
       app.configure do
-        Dir[File.join app.assets_prefix, "*"].each {|path| app.sprockets.append_path path}
-
+        Array(app.assets_prefix).each do |prefix|
+          Dir[File.join prefix, "*"].each { |path| app.sprockets.append_path path }
+        end
         Sprockets::Helpers.configure do |config|
           config.environment = app.sprockets
           config.digest = app.assets_digest
