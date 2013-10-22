@@ -50,10 +50,15 @@ eos
       App
     end
 
-    it "serve font asset whatever name it have" do
+    it "serve an asset whatever name it have" do
       get '/assets/test-_foo.css'
       last_response.should be_ok
       last_response.body.should == css_content
+    end
+
+    it "serve an asset when it is called with is digest" do
+      get '/assets/constructocat2-b5921515627e82a923079eeaefccdbac.jpg'
+      last_response.should be_ok
     end
   end
 end
