@@ -58,10 +58,11 @@ module Sinatra
       self.set(key, default) unless self.respond_to? key
     end
 
+    # Look for asset in Sprockets
+    # If not found try without digest
     def find_asset(source)
-      asset = sprockets.find_asset(source)
-      asset = find_asset(source.gsub(/(-\w+)(?!.*-\w+)/, "")) if asset.nil? 
-      asset
+      sprockets.find_asset(source) ||
+      sprockets.find_asset(source.gsub(/(-\w+)(?!.*-\w+)/, ''))
     end
   end
 end
