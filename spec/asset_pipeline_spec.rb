@@ -30,34 +30,36 @@ html, body {
 eos
   end
 
-  it "assets:precompile to precompile assets" do
-    Rake::Task['assets:precompile'].invoke
+  describe "rake task" do
+    it "precompiles assets" do
+      Rake::Task['assets:precompile'].invoke
 
-    File.read('public/assets/app-a4462e8edd8f78290d836e3f2f524160.js').should == js_content
-    File.read('public/assets/app-bd224f30568e7dea2a28fa2ad3079f45.css').should == css_content
-    File.exists?('public/assets/constructocat2-b5921515627e82a923079eeaefccdbac.jpg').should == true
+      File.read('public/assets/app-a4462e8edd8f78290d836e3f2f524160.js').should == js_content
+      File.read('public/assets/app-bd224f30568e7dea2a28fa2ad3079f45.css').should == css_content
+      File.exists?('public/assets/constructocat2-b5921515627e82a923079eeaefccdbac.jpg').should == true
+    end
+
+    it "cleans precompiled assets" do
+      Rake::Task['assets:clean'].invoke
+
+      Dir['public/assets'].should == []
+    end
   end
 
-  it "assets:clean to clean assets" do
-    Rake::Task['assets:clean'].invoke
-
-    Dir['public/assets'].should == []
-  end
-
-  describe 'the asset pipeline with a basic sinatra app' do
+  describe 'development environment' do
     include Rack::Test::Methods
 
     def app
       App
     end
 
-    it "serve an asset whatever name it have" do
+    it "serves an asset" do
       get '/assets/test-_foo.css'
       last_response.should be_ok
       last_response.body.should == css_content
     end
 
-    it "serve an asset when it is called with is digest" do
+    it "serves an asset with a digest filename" do
       get '/assets/constructocat2-b5921515627e82a923079eeaefccdbac.jpg'
       last_response.should be_ok
     end
