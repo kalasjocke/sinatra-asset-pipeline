@@ -10,7 +10,8 @@ end
 
 Sinatra::AssetPipeline::Task.define! App
 
-  let(:js_content) {
+describe Sinatra::AssetPipeline do
+  let(:js_content) do
     <<eos
 (function() {
   $(function() {
@@ -19,14 +20,15 @@ Sinatra::AssetPipeline::Task.define! App
 
 }).call(this);
 eos
-  }
-  let(:css_content) {
+  end
+
+  let(:css_content) do
     <<eos
 html, body {
   margin: 0;
   padding: 0; }
 eos
-  }
+  end
 
   it "assets:precompile to precompile assets" do
     Rake::Task['assets:precompile'].invoke
