@@ -21,4 +21,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'sprockets-sass'
   gem.add_dependency 'sprockets-helpers'
   gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'rack-test'
 end

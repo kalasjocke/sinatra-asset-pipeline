@@ -46,9 +46,8 @@ module Sinatra
       app.helpers Sprockets::Helpers
 
       app.configure :test, :development do
-        app.get '/assets/*' do |key|
-          key.gsub! /(-\w+)(?!.*-\w+)/, ""
-          asset = app.sprockets[key]
+        app.get '/assets/*' do |source|
+          asset = app.find_asset(source)
           content_type asset.content_type
           asset.to_s
         end
@@ -57,6 +56,13 @@ module Sinatra
 
     def set_default(key, default)
       self.set(key, default) unless self.respond_to? key
+    end
+
+    # Look for asset in Sprockets
+    # If not found try without digest
+    def find_asset(source)
+      sprockets.find_asset(source) ||
+      sprockets.find_asset(source.gsub(/(-\w+)(?!.*-\w+)/, ''))
     end
   end
 end
