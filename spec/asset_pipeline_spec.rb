@@ -4,12 +4,11 @@ require 'sinatra'
 require 'sinatra/asset_pipeline'
 require 'sinatra/asset_pipeline/task.rb'
 
-describe Sinatra::AssetPipeline do
-  class App < Sinatra::Base
-    register Sinatra::AssetPipeline
-  end
+class App < Sinatra::Base
+  register Sinatra::AssetPipeline
+end
 
-  Sinatra::AssetPipeline::Task.define! App
+Sinatra::AssetPipeline::Task.define! App
 
   let(:js_content) {
     <<eos
