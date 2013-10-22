@@ -47,7 +47,6 @@ module Sinatra
 
       app.configure :test, :development do
         app.get '/assets/*' do |key|
-          key.gsub! /(-\w+)(?!.*-\w+)/, ""
           asset = app.sprockets[key]
           content_type asset.content_type
           asset.to_s
