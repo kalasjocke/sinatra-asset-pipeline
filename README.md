@@ -25,7 +25,7 @@ require './app'
 Sinatra::AssetPipeline::Task.define! App
 ```
 
-Now, when everything is in place you can precompile assets with:
+Now, when everything is in place you can precompile assets located in `assets/<asset-type>` with: 
 
 ```bash
 $ rake assets:precompile
@@ -39,7 +39,7 @@ $ rake assets:clean
 
 # Example
 
-In it's most simple form you just register the `Sinatra::AssetPipeline` Sinatra extension within your Sinatra app.
+In it's most simple form you just register the `Sinatra::AssetPipeline` Sinatra extension within your Sinatra app:
 
 ```ruby
 Bundler.require
@@ -100,7 +100,7 @@ body {
 
 ### CSS and JavaScript minification
 
-If you would like to use CSS and/or JavaScript minification make sure to require the gems needed in your `Gemfile`.
+If you would like to use CSS and/or JavaScript minification make sure to require the gems needed in your `Gemfile`:
 
 <table>
   <tr>
@@ -127,5 +127,5 @@ If you would like to use CSS and/or JavaScript minification make sure to require
 
 ### Compass integration
 
-Given that we're using [sprockets-sass](https://github.com/petebrowne/sprockets-sass) we have out of the box support for compass. Just include the compass gem in your `Gemfile` and include the compass mixins in your `app.css.scss` file.
+Given that we're using [sprockets-sass](https://github.com/petebrowne/sprockets-sass) under the hood we have out of the box support for [compass](https://github.com/chriseppstein/compass). Just include the compass gem in your `Gemfile` and include the compass mixins in your `app.css.scss` file.
 
