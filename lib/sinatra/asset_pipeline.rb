@@ -48,8 +48,8 @@ module Sinatra
       app.helpers Sprockets::Helpers
 
       app.configure :test, :development do
-        app.get '/assets/*' do |source|
-          asset = app.find_asset(source)
+        app.get '/assets/*' do |path|
+          asset = app.find_asset(path)
           content_type asset.content_type
           asset.to_s
         end
@@ -60,11 +60,13 @@ module Sinatra
       self.set(key, default) unless self.respond_to? key
     end
 
-    # Look for asset in Sprockets
-    # If not found try without digest
-    def find_asset(source)
-      sprockets.find_asset(source) ||
-      sprockets.find_asset(source.gsub(/(-\w+)(?!.*-\w+)/, ''))
+    def find_asset(path)
+      sprockets.find_asset(path) || self.find_asset_without_digest(path)
+    end
+
+    def find_asset_without_digest(path)
+      path_without_digest = path.gsub(/(-\w+)(?!.*-\w+)/, '')
+      sprockets.find_asset(path_without_digest)
     end
   end
 end
