@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sinatra-asset-pipeline (0.3.0)
+    sinatra-asset-pipeline (0.3.1)
       coffee-script
       rake
       sass
