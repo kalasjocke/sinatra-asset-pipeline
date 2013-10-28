@@ -14,9 +14,7 @@ describe Sinatra::AssetPipeline do
   let(:js_content) do
     <<eos
 (function() {
-  $(function() {
-    return console.log("Boom");
-  });
+  (function() {});
 
 }).call(this);
 eos
@@ -34,7 +32,7 @@ eos
     it "precompiles assets" do
       Rake::Task['assets:precompile'].invoke
 
-      File.read('public/assets/app-a4462e8edd8f78290d836e3f2f524160.js').should == js_content
+      File.read('public/assets/app-e861868bbd5547a396819c648cfec59b.js').should == js_content
       File.read('public/assets/app-bd224f30568e7dea2a28fa2ad3079f45.css').should == css_content
       File.exists?('public/assets/constructocat2-b5921515627e82a923079eeaefccdbac.jpg').should == true
     end
