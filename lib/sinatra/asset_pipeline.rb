@@ -19,8 +19,10 @@ module Sinatra
 
       app.configure do
         app.assets_prefix.each do |prefix|
-          Dir[File.join prefix, "*"].each { |path| app.sprockets.append_path path }
+          paths = Dir[File.join(prefix, '*')]
+          paths.each { |path| app.sprockets.append_path path }
         end
+
         Sprockets::Helpers.configure do |config|
           config.environment = app.sprockets
           config.digest = app.assets_digest
