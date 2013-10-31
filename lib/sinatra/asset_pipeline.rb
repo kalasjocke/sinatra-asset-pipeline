@@ -48,25 +48,16 @@ module Sinatra
       app.helpers Sprockets::Helpers
 
       app.configure :test, :development do
-        app.get '/assets/*' do |path|
-          asset = app.find_asset(path)
-          content_type asset.content_type
-          asset.to_s
+        app.get "#{Sprockets::Helpers.prefix}/*" do |path|
+          env_sprockets = request.env.dup
+          env_sprockets['PATH_INFO'] = path
+          settings.sprockets.call env_sprockets
         end
       end
     end
 
     def set_default(key, default)
       self.set(key, default) unless self.respond_to? key
-    end
-
-    def find_asset(path)
-      sprockets.find_asset(path) || self.find_asset_without_digest(path)
-    end
-
-    def find_asset_without_digest(path)
-      path_without_digest = path.gsub(/(-\w+)(?!.*-\w+)/, '')
-      sprockets.find_asset(path_without_digest)
     end
   end
 end
