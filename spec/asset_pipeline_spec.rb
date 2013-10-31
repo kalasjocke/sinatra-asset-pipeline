@@ -64,6 +64,7 @@ eos
 
     it "serves only the asset body with query param body=1" do
       get '/assets/test_body_param.js?body=1'
+      last_response.should be_ok
       last_response.body.should == %Q[var str = "body";\n]
     end
   end
