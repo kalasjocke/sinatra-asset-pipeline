@@ -61,5 +61,11 @@ eos
       get '/assets/constructocat2-b5921515627e82a923079eeaefccdbac.jpg'
       last_response.should be_ok
     end
+
+    it "serves only the asset body with query param body=1" do
+      get '/assets/test_body_param.js?body=1'
+      last_response.should be_ok
+      last_response.body.should == %Q[var str = "body";\n]
+    end
   end
 end
