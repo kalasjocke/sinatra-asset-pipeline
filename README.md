@@ -98,6 +98,15 @@ body {
 }
 ```
 
+You do *NOT* need to `require` sprockets-helpers in your app file to benefit from the sprocket-helpers integration. 
+If you do `require 'sprockets-helpers'`, this may lead to the following error: 
+
+```
+NameError: uninitialized constant Sinatra::Sprockets::Environment
+```
+
+sinatra-asset-pipeline provides all the necessary integration for sprockets-helpers to be setup for your app.
+
 ### CSS and JavaScript minification
 
 If you would like to use CSS and/or JavaScript minification make sure to require the gems needed in your `Gemfile`:
