@@ -4,6 +4,7 @@ An asset pipeline implementation for Sinatra based on [Sprockets](https://github
 
 # Installation
 
+sinatra-asset-pipeline supports both compiling assets on the fly for development as well as precompiling assets for production.
 
 
 Or include it in your project's Gemfile with Bundler:
