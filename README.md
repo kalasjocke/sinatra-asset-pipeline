@@ -2,12 +2,11 @@
 
 An asset pipeline implementation for Sinatra based on [Sprockets](https://github.com/sstephenson/sprockets) with support for CoffeeScript, SASS, SCSS, LESS, ERB as well as CSS (SASS, YUI) and JavaScript (uglifier, YUI, Closure) minification.
 
-# Installation
-
 sinatra-asset-pipeline supports both compiling assets on the fly for development as well as precompiling assets for production.
 
+# Installation
 
-Or include it in your project's Gemfile with Bundler:
+Include sinatra-asset-pipeline in your project's Gemfile:
 
 ```ruby
 gem 'sinatra-asset-pipeline'
