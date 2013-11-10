@@ -35,7 +35,7 @@ $ RAKE_ENV=production rake assets:clean
 
 # Example
 
-In it's most simple form you just register the `Sinatra::AssetPipeline` Sinatra extension within your Sinatra app:
+In it's most simple form you just register the `Sinatra::AssetPipeline` Sinatra extension within your application:
 
 ```ruby
 Bundler.require
@@ -86,7 +86,7 @@ class App < Sinatra::Base
 end
 ```
 
-Now when everything is in place you can use all helpers provided by [sprockets-helpers](https://github.com/petebrowne/sprockets-helpers), here is a small example:
+Now when everything is in place you can use all helpers provided by [sprockets-helpers](https://github.com/petebrowne/sprockets-helpers), an example:
 
 ```scss
 body {
@@ -94,18 +94,11 @@ body {
 }
 ```
 
-You do *NOT* need to `require` sprockets-helpers in your app file to benefit from the sprocket-helpers integration. 
-If you do `require 'sprockets-helpers'`, this may lead to the following error: 
-
-```
-NameError: uninitialized constant Sinatra::Sprockets::Environment
-```
-
-sinatra-asset-pipeline provides all the necessary integration for sprockets-helpers to be setup for your app.
+Note that you don't need to require [sprockets-helpers](https://github.com/petebrowne/sprockets-helpers) inside your code to leverage the functionallity given to you by the integration, sinatra-asset-pipeline handles that for you.
 
 ### CSS and JavaScript minification
 
-If you would like to use CSS and/or JavaScript minification make sure to require the gems needed in your `Gemfile`:
+If you would like to use CSS and/or JavaScript minification make sure to require the needed gems in your `Gemfile`:
 
 <table>
   <tr>
