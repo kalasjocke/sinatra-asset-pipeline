@@ -4,11 +4,7 @@ An asset pipeline implementation for Sinatra based on [Sprockets](https://github
 
 # Installation
 
-Install sinatra-asset-pipeline from RubyGems:
 
-```bash
-$ gem install sinatra-asset-pipeline
-```
 
 Or include it in your project's Gemfile with Bundler:
 
