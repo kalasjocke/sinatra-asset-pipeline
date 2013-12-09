@@ -1,50 +1,35 @@
 require 'spec_helper'
 
-require 'sinatra'
-require 'sinatra/asset_pipeline'
-require 'sinatra/asset_pipeline/task.rb'
-
-class App < Sinatra::Base
-  register Sinatra::AssetPipeline
-end
-
-Sinatra::AssetPipeline::Task.define! App
-
 describe Sinatra::AssetPipeline do
-  let(:js_content) do
-    <<eos
-(function() {
-  (function() {});
+  include_context "assets"
 
-}).call(this);
-eos
-  end
-
-  let(:css_content) do
-    <<eos
-html, body {
-  margin: 0;
-  padding: 0; }
-eos
-  end
-
-  describe "rake task" do
-    it "precompiles assets" do
-      Rake::Task['assets:precompile'].invoke
-
-      File.read('public/assets/app-e861868bbd5547a396819c648cfec59b.js').should == js_content
-      File.read('public/assets/app-bd224f30568e7dea2a28fa2ad3079f45.css').should == css_content
-      File.exists?('public/assets/constructocat2-b5921515627e82a923079eeaefccdbac.jpg').should == true
+  describe CustomApp do
+    describe "assets_precompile" do
+      it { CustomApp.assets_precompile.should == %w(foo.css foo.js) }
     end
 
-    it "cleans precompiled assets" do
-      Rake::Task['assets:clean'].invoke
+    describe "assets_prefix" do
+      it { CustomApp.assets_prefix.should == %w(spec/assets, foo/bar) }
+    end
 
-      Dir['public/assets'].should == []
+    describe "assets_host" do
+      it { CustomApp.assets_host.should == 'foo.cloudfront.net' }
+    end
+
+    describe "assets_protocol" do
+      it { CustomApp.assets_protocol.should == :https }
+    end
+
+    describe "assets_css_compressor" do
+      it { CustomApp.sprockets.css_compressor.should be Sprockets::SassCompressor }
+    end
+
+    describe "assets_js_compressor" do
+      it { CustomApp.sprockets.js_compressor.should be Sprockets::UglifierCompressor }
     end
   end
 
-  describe 'development environment' do
+  describe "development environment" do
     include Rack::Test::Methods
 
     def app
