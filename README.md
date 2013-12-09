@@ -21,16 +21,16 @@ require './app'
 Sinatra::AssetPipeline::Task.define! App
 ```
 
-Now, when everything is in place you can precompile assets located in `assets/<asset-type>` with: 
+Now, when everything is in place you can precompile assets located in `assets/<asset-type>` with:
 
 ```bash
-$ RAKE_ENV=production rake assets:precompile
+$ RACK_ENV=production rake assets:precompile
 ```
 
 And remove old compiled assets with:
 
 ```bash
-$ RAKE_ENV=production rake assets:clean
+$ RACK_ENV=production rake assets:clean
 ```
 
 # Example
