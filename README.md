@@ -35,7 +35,7 @@ $ RACK_ENV=production rake assets:clean
 
 # Example
 
-In it's most simple form you just register the `Sinatra::AssetPipeline` Sinatra extension within your application:
+In its most simple form, you just register the `Sinatra::AssetPipeline` Sinatra extension within your application:
 
 ```ruby
 Bundler.require
