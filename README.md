@@ -63,7 +63,7 @@ class App < Sinatra::Base
   set :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff)
 
   # Logical paths to your assets
-  set :assets_prefix, %w(assets, vendor/assets)
+  set :assets_prefix, %w(assets vendor/assets)
 
   # Use another host for serving assets
   set :assets_host, '<id>.cloudfront.net'
