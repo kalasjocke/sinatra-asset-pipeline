@@ -15,7 +15,7 @@ gem 'sinatra-asset-pipeline'
 Make sure to add the sinatra-asset-pipeline Rake task in your applications `Rakefile`:
 
 ```ruby
-require 'sinatra/asset_pipeline/task.rb'
+require 'sinatra/asset_pipeline/task'
 require './app'
 
 Sinatra::AssetPipeline::Task.define! App
