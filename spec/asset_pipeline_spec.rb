@@ -3,6 +3,32 @@ require 'spec_helper'
 describe Sinatra::AssetPipeline do
   include_context "assets"
 
+  describe App do
+    describe "assets_precompile" do
+      it { App.assets_precompile.should == %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff) }
+    end
+
+    describe "assets_prefix" do
+      it { App.set_default :assets_prefix, %w(assets vendor/assets) }
+    end
+
+    describe "assets_host" do
+      it { App.assets_host.should == nil }
+    end
+
+    describe "assets_protocol" do
+      it { App.assets_protocol.should == :http }
+    end
+
+    describe "assets_css_compressor" do
+      it { App.sprockets.css_compressor.should == nil }
+    end
+
+    describe "assets_js_compressor" do
+      it { App.sprockets.js_compressor.should == nil }
+    end
+  end
+
   describe CustomApp do
     describe "assets_precompile" do
       it { CustomApp.assets_precompile.should == %w(foo.css foo.js) }
