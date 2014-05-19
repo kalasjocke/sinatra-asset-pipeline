@@ -47,11 +47,11 @@ describe Sinatra::AssetPipeline do
     end
 
     describe "assets_css_compressor" do
-      it { CustomApp.sprockets.css_compressor.should be Sprockets::SassCompressor }
+      it { CustomApp.sprockets.css_compressor.should == Sprockets::SassCompressor }
     end
 
     describe "assets_js_compressor" do
-      it { CustomApp.sprockets.js_compressor.should be Sprockets::UglifierCompressor }
+      it { CustomApp.sprockets.js_compressor.should == Sprockets::UglifierCompressor }
     end
   end
 
