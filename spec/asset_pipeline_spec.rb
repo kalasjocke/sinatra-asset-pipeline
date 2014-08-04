@@ -27,6 +27,11 @@ describe Sinatra::AssetPipeline do
     describe "assets_js_compressor" do
       it { App.sprockets.js_compressor.should == nil }
     end
+
+    describe "assets_digest" do
+      it { App.assets_digest.should == true }
+    end
+
   end
 
   describe CustomApp do
