@@ -9,7 +9,7 @@ describe Sinatra::AssetPipeline do
     end
 
     describe "assets_prefix" do
-      it { App.set_default :assets_prefix, %w(assets vendor/assets) }
+      it { App.assets_prefix.should eq %w(spec/assets) }
     end
 
     describe "assets_host" do
