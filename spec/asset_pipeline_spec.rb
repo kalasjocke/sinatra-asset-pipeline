@@ -13,19 +13,19 @@ describe Sinatra::AssetPipeline do
     end
 
     describe "assets_host" do
-      it { expect(App.assets_host).to eq nil }
+      it { expect(App.assets_host).to be nil }
     end
 
     describe "assets_protocol" do
-      it { expect(App.assets_protocol).to eq :http }
+      it { expect(App.assets_protocol).to be :http }
     end
 
     describe "assets_css_compressor" do
-      it { expect(App.sprockets.css_compressor).to eq nil }
+      it { expect(App.sprockets.css_compressor).to be nil }
     end
 
     describe "assets_js_compressor" do
-      it { expect(App.sprockets.js_compressor).to eq nil }
+      it { expect(App.sprockets.js_compressor).to be nil }
     end
   end
 
@@ -43,7 +43,7 @@ describe Sinatra::AssetPipeline do
     end
 
     describe "assets_protocol" do
-      it { expect(CustomApp.assets_protocol).to eq :https }
+      it { expect(CustomApp.assets_protocol).to be :https }
     end
 
     describe "assets_css_compressor" do
