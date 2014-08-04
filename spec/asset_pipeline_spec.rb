@@ -29,7 +29,7 @@ describe Sinatra::AssetPipeline do
     end
 
     describe "assets_digest" do
-      it { App.assets_digest.should == true }
+      it { expect(App.assets_digest).to be true }
     end
 
   end
