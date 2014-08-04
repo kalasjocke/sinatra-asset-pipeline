@@ -17,8 +17,8 @@ describe Sinatra::AssetPipeline::Task do
       manifest["files"].each_key do |file|
         File.exists?("public/assets/#{file}").should be_true
 
-        File.read("public/assets/#{file}").should == js_content  if file.end_with? '.js'
-        File.read("public/assets/#{file}").should == css_content if file.end_with? '.css'
+        File.read("public/assets/#{file}").should eq js_content  if file.end_with? '.js'
+        File.read("public/assets/#{file}").should eq css_content if file.end_with? '.css'
       end
     end
   end

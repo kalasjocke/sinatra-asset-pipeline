@@ -5,7 +5,7 @@ describe Sinatra::AssetPipeline do
 
   describe App do
     describe "assets_precompile" do
-      it { App.assets_precompile.should == %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff) }
+      it { App.assets_precompile.should eq %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff) }
     end
 
     describe "assets_prefix" do
@@ -13,45 +13,45 @@ describe Sinatra::AssetPipeline do
     end
 
     describe "assets_host" do
-      it { App.assets_host.should == nil }
+      it { App.assets_host.should eq nil }
     end
 
     describe "assets_protocol" do
-      it { App.assets_protocol.should == :http }
+      it { App.assets_protocol.should eq :http }
     end
 
     describe "assets_css_compressor" do
-      it { App.sprockets.css_compressor.should == nil }
+      it { App.sprockets.css_compressor.should eq nil }
     end
 
     describe "assets_js_compressor" do
-      it { App.sprockets.js_compressor.should == nil }
+      it { App.sprockets.js_compressor.should eq nil }
     end
   end
 
   describe CustomApp do
     describe "assets_precompile" do
-      it { CustomApp.assets_precompile.should == %w(foo.css foo.js) }
+      it { CustomApp.assets_precompile.should eq %w(foo.css foo.js) }
     end
 
     describe "assets_prefix" do
-      it { CustomApp.assets_prefix.should == %w(spec/assets, foo/bar) }
+      it { CustomApp.assets_prefix.should eq %w(spec/assets, foo/bar) }
     end
 
     describe "assets_host" do
-      it { CustomApp.assets_host.should == 'foo.cloudfront.net' }
+      it { CustomApp.assets_host.should eq 'foo.cloudfront.net' }
     end
 
     describe "assets_protocol" do
-      it { CustomApp.assets_protocol.should == :https }
+      it { CustomApp.assets_protocol.should eq :https }
     end
 
     describe "assets_css_compressor" do
-      it { CustomApp.sprockets.css_compressor.should == Sprockets::SassCompressor }
+      it { CustomApp.sprockets.css_compressor.should eq Sprockets::SassCompressor }
     end
 
     describe "assets_js_compressor" do
-      it { CustomApp.sprockets.js_compressor.should == Sprockets::UglifierCompressor }
+      it { CustomApp.sprockets.js_compressor.should eq Sprockets::UglifierCompressor }
     end
   end
 
@@ -65,7 +65,7 @@ describe Sinatra::AssetPipeline do
     it "serves an asset" do
       get '/assets/test-_foo.css'
       last_response.should be_ok
-      last_response.body.should == css_content
+      last_response.body.should eq css_content
     end
 
     it "serves an asset with a digest filename" do
@@ -76,7 +76,7 @@ describe Sinatra::AssetPipeline do
     it "serves only the asset body with query param body=1" do
       get '/assets/test_body_param.js?body=1'
       last_response.should be_ok
-      last_response.body.should == %Q[var str = "body";\n]
+      last_response.body.should eq %Q[var str = "body";\n]
     end
   end
 end
