@@ -13,6 +13,7 @@ module Sinatra
       app.set_default :assets_css_compressor, nil
       app.set_default :assets_js_compressor, nil
       app.set_default :assets_host, nil
+      app.set_default :path_prefix, nil
 
       app.set :static, true
       app.set :assets_digest, true
@@ -27,12 +28,14 @@ module Sinatra
         Sprockets::Helpers.configure do |config|
           config.environment = app.sprockets
           config.digest = app.assets_digest
+          config.prefix = app.path_prefix unless app.path_prefix.nil?
         end
       end
 
       app.configure :staging, :production do
         Sprockets::Helpers.configure do |config|
           config.manifest = Sprockets::Manifest.new(app.sprockets, app.assets_path)
+          config.prefix = app.path_prefix unless app.path_prefix.nil?
         end
       end
 
@@ -43,6 +46,7 @@ module Sinatra
         Sprockets::Helpers.configure do |config|
           config.protocol = app.assets_protocol
           config.asset_host = app.assets_host unless app.assets_host.nil?
+          config.prefix = app.path_prefix unless app.path_prefix.nil?
         end
       end
 
