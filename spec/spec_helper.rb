@@ -23,6 +23,13 @@ class CustomApp < Sinatra::Base
   set :environment, :production
   set :assets_css_compressor, :sass
   set :assets_js_compressor, :uglifier
+  set :path_prefix, "/static"
+  register Sinatra::AssetPipeline
+end
+
+class PrefixApp < Sinatra::Base
+  set :assets_prefix, %w(spec/assets)
+  set :path_prefix, "/static"
   register Sinatra::AssetPipeline
 end
 

@@ -27,6 +27,10 @@ describe Sinatra::AssetPipeline do
     describe "assets_js_compressor" do
       it { App.sprockets.js_compressor.should == nil }
     end
+
+    describe "assets_path_prefix" do
+      it { App.path_prefix.should == nil }
+    end
   end
 
   describe CustomApp do
@@ -53,6 +57,10 @@ describe Sinatra::AssetPipeline do
     describe "assets_js_compressor" do
       it { CustomApp.sprockets.js_compressor.should == Sprockets::UglifierCompressor }
     end
+
+    describe "assets_path_prefix" do
+      it { CustomApp.path_prefix.should == '/static' }
+    end
   end
 
   describe "development environment" do
@@ -77,6 +85,20 @@ describe Sinatra::AssetPipeline do
       get '/assets/test_body_param.js?body=1'
       last_response.should be_ok
       last_response.body.should == %Q[var str = "body";\n]
+    end
+  end
+
+  describe "path prefix" do
+    include Rack::Test::Methods
+
+    def app
+      PrefixApp
+    end
+
+    it "serves an asset from the specified path prefix" do
+      get '/static/test-_foo.css'
+      last_response.should be_ok
+      last_response.body.should == css_content
     end
   end
 end
