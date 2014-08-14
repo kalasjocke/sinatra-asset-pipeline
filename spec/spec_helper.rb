@@ -4,6 +4,12 @@ require 'sinatra/asset_pipeline/task'
 
 require 'rack/test'
 
+RSpec.configure do |config|
+  config.expect_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
+end
+
 class App < Sinatra::Base
   set :assets_prefix, %w(spec/assets)
   register Sinatra::AssetPipeline
