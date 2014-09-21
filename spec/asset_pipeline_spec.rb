@@ -29,7 +29,7 @@ describe Sinatra::AssetPipeline do
     end
 
     describe "assets_path_prefix" do
-      it { App.path_prefix.should == nil }
+      it { expect(App.path_prefix).to be nil }
     end
 
     describe "assets_digest" do
@@ -63,7 +63,7 @@ describe Sinatra::AssetPipeline do
     end
 
     describe "assets_path_prefix" do
-      it { CustomApp.path_prefix.should == '/static' }
+      it { expect(CustomApp.path_prefix).to eq '/static' }
     end
   end
 
@@ -76,17 +76,20 @@ describe Sinatra::AssetPipeline do
 
     it "serves an asset" do
       get '/assets/test-_foo.css'
+
       expect(last_response).to be_ok
       expect(last_response.body).to eq css_content
     end
 
     it "serves an asset with a digest filename" do
       get '/assets/constructocat2-b5921515627e82a923079eeaefccdbac.jpg'
+
       expect(last_response).to be_ok
     end
 
     it "serves only the asset body with query param body=1" do
       get '/assets/test_body_param.js?body=1'
+
       expect(last_response).to be_ok
       expect(last_response.body).to eq %Q[var str = "body";\n]
     end
@@ -101,8 +104,9 @@ describe Sinatra::AssetPipeline do
 
     it "serves an asset from the specified path prefix" do
       get '/static/test-_foo.css'
-      last_response.should be_ok
-      last_response.body.should == css_content
+
+      expect(last_response).to be_ok
+      expect(last_response.body).to eq css_content
     end
   end
 end
