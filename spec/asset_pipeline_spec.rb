@@ -31,6 +31,10 @@ describe Sinatra::AssetPipeline do
     describe "assets_path_prefix" do
       it { App.path_prefix.should == nil }
     end
+
+    describe "assets_digest" do
+      it { expect(App.assets_digest).to be true }
+    end
   end
 
   describe CustomApp do
