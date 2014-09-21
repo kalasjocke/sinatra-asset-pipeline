@@ -11,11 +11,11 @@ describe Sinatra::AssetPipeline::Task do
     it "precompiles assets" do
       Rake::Task['assets:precompile'].invoke
 
-      File.exists?(Dir.glob("public/assets/manifest-*.json").first).should be_true
+      File.exists?(Dir.glob("public/assets/manifest-*.json").first).should be_truthy
 
       manifest = JSON.parse File.read(Dir.glob("public/assets/manifest-*.json").first)
       manifest["files"].each_key do |file|
-        File.exists?("public/assets/#{file}").should be_true
+        File.exists?("public/assets/#{file}").should be_truthy
 
         File.read("public/assets/#{file}").should == js_content  if file.end_with? '.js'
         File.read("public/assets/#{file}").should == css_content if file.end_with? '.css'
