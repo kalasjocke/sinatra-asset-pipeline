@@ -36,6 +36,10 @@ describe Sinatra::AssetPipeline do
       it { expect(App.assets_digest).to be true }
     end
 
+    describe "assets_expand" do
+      it { expect(App.assets_expand).to be false }
+    end
+
     describe "path_prefix" do
       it { expect(App.path_prefix).to be nil }
     end
@@ -68,6 +72,10 @@ describe Sinatra::AssetPipeline do
 
     describe "assets_path_prefix" do
       it { expect(CustomApp.path_prefix).to eq '/static' }
+    end
+
+    describe "assets_expand" do
+      it { expect(CustomApp.assets_expand).to eq true }
     end
   end
 
