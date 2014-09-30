@@ -14,7 +14,7 @@ module Sinatra
       app.set_default :assets_js_compressor, nil
       app.set_default :assets_host, nil
       app.set_default :assets_digest, true
-      app.set_default :assets_expand, false
+      app.set_default :assets_debug, false
       app.set_default :path_prefix, nil
 
       app.set :static, :true
@@ -30,7 +30,7 @@ module Sinatra
           config.environment = app.sprockets
           config.digest = app.assets_digest
           config.prefix = app.path_prefix unless app.path_prefix.nil?
-          config.debug = app.assets_expand
+          config.debug = app.assets_debug
         end
       end
 
