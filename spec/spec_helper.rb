@@ -11,12 +11,12 @@ RSpec.configure do |config|
 end
 
 class App < Sinatra::Base
-  set :assets_prefix, %w(spec/assets)
+  set :assets_prefix, %w(assets)
   register Sinatra::AssetPipeline
 end
 
 class CustomApp < Sinatra::Base
-  set :assets_prefix, %w(spec/assets, foo/bar)
+  set :assets_prefix, %w(assets, foo/bar)
   set :assets_precompile, %w(foo.css foo.js)
   set :assets_host, 'foo.cloudfront.net'
   set :assets_protocol, :https
@@ -29,7 +29,7 @@ class CustomApp < Sinatra::Base
 end
 
 class PrefixApp < Sinatra::Base
-  set :assets_prefix, %w(spec/assets)
+  set :assets_prefix, %w(assets)
   set :path_prefix, "/static"
   register Sinatra::AssetPipeline
 end

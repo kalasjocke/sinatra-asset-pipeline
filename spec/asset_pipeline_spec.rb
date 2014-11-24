@@ -9,7 +9,7 @@ describe Sinatra::AssetPipeline do
     end
 
     describe "assets_prefix" do
-      it { expect(App.assets_prefix).to eq %w(spec/assets) }
+      it { expect(App.assets_prefix).to eq %w(assets) }
     end
 
     describe "assets_host" do
@@ -51,7 +51,7 @@ describe Sinatra::AssetPipeline do
     end
 
     describe "assets_prefix" do
-      it { expect(CustomApp.assets_prefix).to eq %w(spec/assets, foo/bar) }
+      it { expect(CustomApp.assets_prefix).to eq %w(assets, foo/bar) }
     end
 
     describe "assets_host" do
