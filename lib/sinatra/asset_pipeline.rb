@@ -16,6 +16,7 @@ module Sinatra
       app.set_default :assets_digest, true
       app.set_default :assets_debug, false
       app.set_default :path_prefix, nil
+      app.set_default :register_asset_engines, {}
 
       app.set :static, :true
       app.set :static_cache_control, [:public, :max_age => 60 * 60 * 24 * 365]
@@ -24,6 +25,10 @@ module Sinatra
         app.assets_prefix.each do |prefix|
           paths = Dir[File.join(app.root, prefix, '*')]
           paths.each { |path| app.sprockets.append_path path }
+        end
+
+        app.register_asset_engines.each do |key, value|
+          app.sprockets.register_engine ".#{key}", value
         end
 
         Sprockets::Helpers.configure do |config|
