@@ -22,6 +22,12 @@ require './app'
 Sinatra::AssetPipeline::Task.define! App
 ```
 
+If your application runs Sinatra in classic style you can define your Rake task as follows:
+
+```ruby
+Sinatra::AssetPipeline::Task.define! Sinatra::Application
+```
+
 Now, when everything is in place you can precompile assets located in `assets/<asset-type>` with:
 
 ```bash
