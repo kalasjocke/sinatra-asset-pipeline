@@ -41,7 +41,7 @@ module Sinatra
         end
       end
 
-      app.configure :production do
+      app.configure :staging, :production do
         app.sprockets.css_compressor = app.assets_css_compressor unless app.assets_css_compressor.nil?
         app.sprockets.js_compressor = app.assets_js_compressor unless app.assets_js_compressor.nil?
 
