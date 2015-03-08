@@ -75,8 +75,7 @@ class App < Sinatra::Base
   # Use another host for serving assets
   set :assets_host, '<id>.cloudfront.net'
 
-  # Serve assets using this protocol
-  # Options are: :http(default), :https and :relative(//)
+  # Serve assets using this protocol (http, :https, :relative)
   set :assets_protocol, :http
 
   # CSS minification
