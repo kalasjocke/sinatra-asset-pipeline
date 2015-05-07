@@ -67,4 +67,6 @@ module Sinatra
       self.set(key, default) unless self.respond_to? key
     end
   end
+
+  register AssetPipeline
 end
