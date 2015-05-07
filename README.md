@@ -67,7 +67,7 @@ require 'sinatra/asset_pipeline'
 
 class App < Sinatra::Base
   # Include these files when precompiling assets
-  set :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff)
+  set :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff *.woff2)
 
   # Logical paths to your assets
   set :assets_prefix, %w(assets vendor/assets)

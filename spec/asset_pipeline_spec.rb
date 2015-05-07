@@ -5,7 +5,7 @@ describe Sinatra::AssetPipeline do
 
   describe App do
     describe "assets_precompile" do
-      it { expect(App.assets_precompile).to eq %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff) }
+      it { expect(App.assets_precompile).to eq %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff *.woff2) }
     end
 
     describe "assets_prefix" do

@@ -6,7 +6,7 @@ module Sinatra
   module AssetPipeline
     def self.registered(app)
       app.set_default :sprockets, Sprockets::Environment.new
-      app.set_default :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff)
+      app.set_default :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff *.woff2)
       app.set_default :assets_prefix, %w(assets vendor/assets)
       app.set_default :assets_path, -> { File.join(public_folder, "assets") }
       app.set_default :assets_protocol, :http
