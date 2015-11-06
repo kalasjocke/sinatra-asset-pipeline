@@ -1,3 +1,4 @@
+require 'pathname'
 require 'sprockets'
 require 'sprockets-sass'
 require 'sprockets-helpers'
@@ -22,7 +23,11 @@ module Sinatra
 
       app.configure do
         app.assets_prefix.each do |prefix|
-          paths = Dir[File.join(app.root, prefix, '*')]
+          paths = if Pathname.new(prefix).absolute?
+            Dir[File.join(prefix, '*')]
+          else
+            Dir[File.join(app.root, prefix, '*')]
+          end
           paths.each { |path| app.sprockets.append_path path }
         end
 
