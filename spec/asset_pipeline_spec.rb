@@ -51,7 +51,7 @@ describe Sinatra::AssetPipeline do
     end
 
     describe "assets_prefix" do
-      it { expect(CustomApp.assets_prefix).to eq %w(assets, foo/bar) }
+      it { expect(CustomApp.assets_prefix).to eq %w(assets, foo/bar /home/example/assets) }
     end
 
     describe "assets_host" do
@@ -76,6 +76,12 @@ describe Sinatra::AssetPipeline do
 
     describe "assets_debug" do
       it { expect(CustomApp.assets_debug).to eq true }
+    end
+
+    it "supports absolute path_prefixes" do
+      allow(Dir).to receive(:[]).and_return(["/home/example/assets/javascripts"])
+      CustomApp.register(Sinatra::AssetPipeline)
+      expect(CustomApp.sprockets.paths).to include("/home/example/assets/javascripts")
     end
   end
 
