@@ -84,7 +84,7 @@ class App < Sinatra::Base
   # JavaScript minification
   set :assets_js_compressor, :uglifier
 
-  # Register the AssetPipeline extention, make sure this goes after all customization
+  # Register the AssetPipeline extension, make sure this goes after all customization
   register Sinatra::AssetPipeline
 
   get '/' do
