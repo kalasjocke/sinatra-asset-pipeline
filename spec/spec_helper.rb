@@ -16,7 +16,7 @@ class App < Sinatra::Base
 end
 
 class CustomApp < Sinatra::Base
-  set :assets_prefix, %w(assets, foo/bar)
+  set :assets_prefix, %w(assets, foo/bar /home/example/assets)
   set :assets_precompile, %w(foo.css foo.js)
   set :assets_host, 'foo.cloudfront.net'
   set :assets_protocol, :https
