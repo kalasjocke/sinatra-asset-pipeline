@@ -1,5 +1,4 @@
 require 'sprockets'
-require 'sprockets-sass'
 require 'sprockets-helpers'
 
 module Sinatra
@@ -67,6 +66,4 @@ module Sinatra
       self.set(key, default) unless self.respond_to? key
     end
   end
-
-  register AssetPipeline
 end

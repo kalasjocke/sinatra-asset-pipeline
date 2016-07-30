@@ -94,7 +94,7 @@ describe Sinatra::AssetPipeline do
     end
 
     it "serves an asset with a digest filename" do
-      get '/assets/constructocat2-b5921515627e82a923079eeaefccdbac.jpg'
+      get '/assets/constructocat2-b44344a7a501a79f5080f66bc73d7566f7ed12030819ed0baa7f0f613a65db01.jpg'
 
       expect(last_response).to be_ok
     end
