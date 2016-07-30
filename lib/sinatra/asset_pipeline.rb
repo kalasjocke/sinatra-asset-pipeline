@@ -1,5 +1,4 @@
 require 'sprockets'
-require 'sprockets-sass'
 require 'sprockets-helpers'
 
 module Sinatra
