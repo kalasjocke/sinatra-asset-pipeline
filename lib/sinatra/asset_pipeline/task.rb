@@ -10,13 +10,13 @@ module Sinatra
           desc "Precompile assets"
           task :precompile do
             environment = app_klass.sprockets
-            manifest = Sprockets::Manifest.new(environment.index, app_klass.assets_path)
+            manifest = Sprockets::Manifest.new(environment.index, app_klass.assets_public_path)
             manifest.compile(app_klass.assets_precompile)
           end
 
           desc "Clean assets"
           task :clean do
-            FileUtils.rm_rf(app_klass.assets_path)
+            FileUtils.rm_rf(app_klass.assets_public_path)
           end
         end
       end
