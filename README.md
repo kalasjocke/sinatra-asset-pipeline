@@ -71,11 +71,14 @@ class App < Sinatra::Base
   # Include these files when precompiling assets
   set :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff *.woff2)
 
-  set :assets_prefix, %w(assets vendor/assets)
   # The path to your assets
+  set :assets_paths, %w(assets)
 
   # Use another host for serving assets
   set :assets_host, '<id>.cloudfront.net'
+
+  # Which prefix to serve the assets under
+  set :assets_prefix, 'custom-prefix'
 
   # Serve assets using this protocol (http, :https, :relative)
   set :assets_protocol, :http

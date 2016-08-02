@@ -8,8 +8,8 @@ describe Sinatra::AssetPipeline do
       it { expect(App.assets_precompile).to eq %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff *.woff2) }
     end
 
-    describe "assets_prefix" do
-      it { expect(App.assets_prefix).to eq %w(assets) }
+    describe "assets_paths" do
+      it { expect(App.assets_paths).to eq %w(assets) }
     end
 
     describe "assets_host" do
@@ -28,10 +28,6 @@ describe Sinatra::AssetPipeline do
       it { expect(App.sprockets.js_compressor).to be nil }
     end
 
-    describe "assets_path_prefix" do
-      it { expect(App.path_prefix).to be nil }
-    end
-
     describe "assets_digest" do
       it { expect(App.assets_digest).to be true }
     end
@@ -40,8 +36,8 @@ describe Sinatra::AssetPipeline do
       it { expect(App.assets_debug).to be false }
     end
 
-    describe "path_prefix" do
-      it { expect(App.path_prefix).to be nil }
+    describe "assets_prefix" do
+      it { expect(App.assets_prefix).to eq '/assets' }
     end
   end
 
@@ -50,8 +46,8 @@ describe Sinatra::AssetPipeline do
       it { expect(CustomApp.assets_precompile).to eq %w(foo.css foo.js) }
     end
 
-    describe "assets_prefix" do
-      it { expect(CustomApp.assets_prefix).to eq %w(assets foo/bar) }
+    describe "assets_paths" do
+      it { expect(CustomApp.assets_paths).to eq %w(assets foo/bar) }
     end
 
     describe "assets_host" do
@@ -70,8 +66,8 @@ describe Sinatra::AssetPipeline do
       it { expect(CustomApp.sprockets.js_compressor).to eq Sprockets::UglifierCompressor }
     end
 
-    describe "assets_path_prefix" do
-      it { expect(CustomApp.path_prefix).to eq '/static' }
+    describe "assets_prefix" do
+      it { expect(CustomApp.assets_prefix).to eq '/static' }
     end
 
     describe "assets_debug" do
@@ -107,7 +103,7 @@ describe Sinatra::AssetPipeline do
       PrefixApp
     end
 
-    it "serves an asset from the specified path prefix" do
+    it "serves an asset from the specified asset prefix" do
       get '/static/stylesheets/test-_foo.css'
 
       expect(last_response).to be_ok
