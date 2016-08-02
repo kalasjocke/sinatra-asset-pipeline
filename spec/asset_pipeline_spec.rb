@@ -79,7 +79,7 @@ describe Sinatra::AssetPipeline do
     end
   end
 
-  describe "development environment" do
+  describe "in development environment" do
     include Rack::Test::Methods
 
     def app
