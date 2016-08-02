@@ -98,13 +98,6 @@ describe Sinatra::AssetPipeline do
 
       expect(last_response).to be_ok
     end
-
-    it "serves only the asset body with query param body=1" do
-      get '/assets/test_body_param.js?body=1'
-
-      expect(last_response).to be_ok
-      expect(last_response.body).to eq %Q[var str = "body";\n]
-    end
   end
 
   describe "path prefix" do
