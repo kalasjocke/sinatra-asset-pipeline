@@ -1,5 +1,4 @@
 require 'sprockets'
-require 'sprockets-sass'
 require 'sprockets-helpers'
 
 module Sinatra
@@ -22,8 +21,7 @@ module Sinatra
 
       app.configure do
         app.assets_prefix.each do |prefix|
-          paths = Dir[File.join(app.root, prefix, '*')]
-          paths.each { |path| app.sprockets.append_path path }
+          app.sprockets.append_path File.join(app.root, prefix)
         end
 
         Sprockets::Helpers.configure do |config|
@@ -67,6 +65,4 @@ module Sinatra
       self.set(key, default) unless self.respond_to? key
     end
   end
-
-  register AssetPipeline
 end

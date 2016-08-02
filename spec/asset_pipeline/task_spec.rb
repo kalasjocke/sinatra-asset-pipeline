@@ -11,9 +11,13 @@ describe Sinatra::AssetPipeline::Task do
     it "precompiles assets" do
       Rake::Task['assets:precompile'].invoke
 
-      expect(File.exists?(Dir.glob("public/assets/manifest-*.json").first)).to be true
+      manifest_path = 'public/assets/.sprockets-manifest-*.json'
+      globbed = Dir.glob(manifest_path)
 
-      manifest = JSON.parse File.read(Dir.glob("public/assets/manifest-*.json").first)
+      expect(globbed).to_not be_empty
+      expect(File.exists?(globbed.first)).to be true
+
+      manifest = JSON.parse File.read(globbed.first)
 
       manifest["files"].each_key do |file|
         expect(File.exists?("public/assets/#{file}")).to be true

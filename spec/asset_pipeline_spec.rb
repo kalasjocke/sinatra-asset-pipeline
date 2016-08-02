@@ -51,7 +51,7 @@ describe Sinatra::AssetPipeline do
     end
 
     describe "assets_prefix" do
-      it { expect(CustomApp.assets_prefix).to eq %w(assets, foo/bar) }
+      it { expect(CustomApp.assets_prefix).to eq %w(assets foo/bar) }
     end
 
     describe "assets_host" do
@@ -79,7 +79,7 @@ describe Sinatra::AssetPipeline do
     end
   end
 
-  describe "development environment" do
+  describe "in development environment" do
     include Rack::Test::Methods
 
     def app
@@ -87,23 +87,16 @@ describe Sinatra::AssetPipeline do
     end
 
     it "serves an asset" do
-      get '/assets/test-_foo.css'
+      get '/assets/stylesheets/test-_foo.css'
 
       expect(last_response).to be_ok
       expect(last_response.body).to eq css_content
     end
 
     it "serves an asset with a digest filename" do
-      get '/assets/constructocat2-b5921515627e82a923079eeaefccdbac.jpg'
+      get '/assets/images/constructocat2-b44344a7a501a79f5080f66bc73d7566f7ed12030819ed0baa7f0f613a65db01.jpg'
 
       expect(last_response).to be_ok
-    end
-
-    it "serves only the asset body with query param body=1" do
-      get '/assets/test_body_param.js?body=1'
-
-      expect(last_response).to be_ok
-      expect(last_response.body).to eq %Q[var str = "body";\n]
     end
   end
 
@@ -115,7 +108,7 @@ describe Sinatra::AssetPipeline do
     end
 
     it "serves an asset from the specified path prefix" do
-      get '/static/test-_foo.css'
+      get '/static/stylesheets/test-_foo.css'
 
       expect(last_response).to be_ok
       expect(last_response.body).to eq css_content
