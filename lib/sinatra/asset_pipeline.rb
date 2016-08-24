@@ -4,7 +4,7 @@ require 'sprockets-helpers'
 module Sinatra
   module AssetPipeline
     def self.registered(app)
-      app.set_default :sprockets, Sprockets::Environment.new
+      app.set_default :sprockets, ::Sprockets::Environment.new
       app.set_default :assets_paths, %w(assets)
       app.set_default :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff *.woff2)
       app.set_default :assets_public_path, -> { File.join(public_folder, "assets") }
@@ -24,7 +24,7 @@ module Sinatra
           app.sprockets.append_path File.join(app.root, path)
         end
 
-        Sprockets::Helpers.configure do |config|
+        ::Sprockets::Helpers.configure do |config|
           config.environment = app.sprockets
           config.digest = app.assets_digest
           config.prefix = app.assets_prefix unless app.assets_prefix.nil?
@@ -33,7 +33,7 @@ module Sinatra
       end
 
       app.configure :staging, :production do
-        Sprockets::Helpers.configure do |config|
+        ::Sprockets::Helpers.configure do |config|
           config.manifest = Sprockets::Manifest.new(app.sprockets, app.assets_public_path)
           config.prefix = app.assets_prefix unless app.assets_prefix.nil?
         end
@@ -43,14 +43,14 @@ module Sinatra
         app.sprockets.css_compressor = app.assets_css_compressor unless app.assets_css_compressor.nil?
         app.sprockets.js_compressor = app.assets_js_compressor unless app.assets_js_compressor.nil?
 
-        Sprockets::Helpers.configure do |config|
+        ::Sprockets::Helpers.configure do |config|
           config.protocol = app.assets_protocol
           config.asset_host = app.assets_host unless app.assets_host.nil?
           config.prefix = app.assets_prefix unless app.assets_prefix.nil?
         end
       end
 
-      app.helpers Sprockets::Helpers
+      app.helpers ::Sprockets::Helpers
 
       app.configure :test, :development do
         app.get "#{app.assets_prefix}/*" do |path|
