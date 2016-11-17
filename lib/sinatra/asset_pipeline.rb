@@ -34,7 +34,7 @@ module Sinatra
 
       app.configure :staging, :production do
         ::Sprockets::Helpers.configure do |config|
-          config.manifest = Sprockets::Manifest.new(app.sprockets, app.assets_public_path)
+          config.manifest = ::Sprockets::Manifest.new(app.sprockets, app.assets_public_path)
           config.prefix = app.assets_prefix unless app.assets_prefix.nil?
         end
       end
