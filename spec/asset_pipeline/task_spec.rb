@@ -6,8 +6,8 @@ describe Sinatra::AssetPipeline::Task do
   include_context "assets"
 
   before(:all) { Dir.chdir "spec" }
-
-  let(:manifest) do
+  
+  let(:json_manifest) do
     manifest_path = 'public/assets/.sprockets-manifest-*.json'
     globbed = Dir.glob(manifest_path)
     JSON.parse File.read(globbed.first)
@@ -17,11 +17,11 @@ describe Sinatra::AssetPipeline::Task do
     before { Rake::Task['assets:precompile'].invoke }
 
     it "generates a manifest" do
-      expect(manifest).not_to be_empty
+      expect(json_manifest).not_to be_empty
     end
 
     it "precompiles assets" do
-      manifest["files"].each_key do |file|
+      json_manifest["files"].each_key do |file|
         expect(File.exists?("public/assets/#{file}")).to be true
         expect(File.read("public/assets/#{file}")).to eq js_content  if file.end_with? '.js'
         expect(File.read("public/assets/#{file}")).to eq css_content if file.end_with? '.css'
@@ -32,8 +32,8 @@ describe Sinatra::AssetPipeline::Task do
   describe "assets:clean" do
     before { Rake::Task['assets:precompile'].invoke }
 
-    context 'with default keep of 2' do
-      it "cleans precompiled assets" do
+    context 'with default keep' do
+      it "removes only outdated compiled assets" do
         Rake::Task['assets:clean'].invoke
 
         expect(Dir['public/assets']).not_to be_empty
