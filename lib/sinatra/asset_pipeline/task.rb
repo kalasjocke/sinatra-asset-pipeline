@@ -30,17 +30,23 @@ module Sinatra
 
           desc "Compile all assets"
           task :precompile do
-            manifest.compile(assets)
+            with_logger do
+              manifest.compile(assets)
+            end
           end
 
           desc "Remove old compiled assets"
           task :clean, [:keep] do |t, args|
-            manifest.clean(Integer(args.keep || self.keep))
+            with_logger do
+              manifest.clean(Integer(args.keep || self.keep))
+            end
           end
 
           desc "Remove compiled assets"
           task :clobber do
-            manifest.clobber
+            with_logger do
+              manifest.clobber
+            end
           end
         end
       end
