@@ -15,6 +15,7 @@ module Sinatra
       app.set_default :assets_prefix, '/assets'
       app.set_default :assets_digest, true
       app.set_default :assets_debug, false
+      app.set_default :precompiled_environments, %i(staging production)
 
       app.set :static, :true
       app.set :static_cache_control, [:public, :max_age => 60 * 60 * 24 * 365]
@@ -32,14 +33,14 @@ module Sinatra
         end
       end
 
-      app.configure :staging, :production do
+      app.configure(*app.precompiled_environments) do
         ::Sprockets::Helpers.configure do |config|
           config.manifest = ::Sprockets::Manifest.new(app.sprockets, app.assets_public_path)
           config.prefix = app.assets_prefix unless app.assets_prefix.nil?
         end
       end
 
-      app.configure :staging, :production do
+      app.configure(*app.precompiled_environments) do
         app.sprockets.css_compressor = app.assets_css_compressor unless app.assets_css_compressor.nil?
         app.sprockets.js_compressor = app.assets_js_compressor unless app.assets_js_compressor.nil?
 
