@@ -1,28 +1,58 @@
 require 'rake'
-require 'rake/tasklib'
 require 'rake/sprocketstask'
+require 'sprockets'
 
 module Sinatra
   module AssetPipeline
-    class Task < Rake::TaskLib
-      def initialize(app_klass)
+    class Task < Rake::SprocketsTask
+      attr_accessor :app
+
+      def initialize(app = nil)
+        self.app = app
+        super()
+      end
+
+      def environment
+        app ? app.sprockets : super
+      end
+
+      def assets
+        app ? app.assets_precompile : super
+      end
+
+      def manifest
+        app ? Sprockets::Manifest.new(environment.index, app.assets_public_path) : super
+      end
+
+      def define
         namespace :assets do
-          desc "Precompile assets"
+          %w( precompile clean clobber ).each { |task| Rake::Task[task].clear if Rake::Task.task_defined?(task) }
+
+          desc "Compile all assets"
           task :precompile do
-            environment = app_klass.sprockets
-            manifest = ::Sprockets::Manifest.new(environment.index, app_klass.assets_public_path)
-            manifest.compile(app_klass.assets_precompile)
+            with_logger do
+              manifest.compile(assets)
+            end
           end
 
-          desc "Clean assets"
-          task :clean do
-            FileUtils.rm_rf(app_klass.assets_public_path)
+          desc "Remove old compiled assets"
+          task :clean, [:keep] do |t, args|
+            with_logger do
+              manifest.clean(Integer(args.keep || self.keep))
+            end
+          end
+
+          desc "Remove compiled assets"
+          task :clobber do
+            with_logger do
+              manifest.clobber
+            end
           end
         end
       end
 
-      def self.define!(app_klass)
-        self.new app_klass
+      def self.define!(app)
+        self.new(app)
       end
     end
   end
