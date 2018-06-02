@@ -39,6 +39,10 @@ describe Sinatra::AssetPipeline do
     describe "assets_prefix" do
       it { expect(App.assets_prefix).to eq '/assets' }
     end
+
+    describe "precompiled_environments" do
+      it { expect(App.precompiled_environments).to eq %i(staging production) }
+    end
   end
 
   describe CustomApp do
@@ -72,6 +76,10 @@ describe Sinatra::AssetPipeline do
 
     describe "assets_debug" do
       it { expect(CustomApp.assets_debug).to eq true }
+    end
+
+    describe "precompiled_environments" do
+      it { expect(CustomApp.precompiled_environments).to eq %i(staging uat production) }
     end
   end
 

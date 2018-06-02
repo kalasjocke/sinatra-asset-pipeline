@@ -24,6 +24,7 @@ class CustomApp < Sinatra::Base
   set :assets_js_compressor, :uglifier
   set :assets_prefix, "/static"
   set :assets_debug, true
+  set :precompiled_environments, %i(staging uat production)
   register Sinatra::AssetPipeline
 end
 
