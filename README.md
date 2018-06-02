@@ -91,6 +91,9 @@ class App < Sinatra::Base
 
   # Register the AssetPipeline extension, make sure this goes after all customization
   register Sinatra::AssetPipeline
+  
+  # If you need more environments
+  set :precompiled_environments, %i(staging uat production)
 
   get '/' do
     'hi'
