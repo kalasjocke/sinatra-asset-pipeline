@@ -15,7 +15,7 @@ class App < Sinatra::Base
 end
 
 class CustomApp < Sinatra::Base
-  set :assets_paths, %w(assets foo/bar)
+  set :assets_paths, %w(assets foo/bar /some/path/to/a/third-party/gem)
   set :assets_precompile, %w(foo.css foo.js)
   set :assets_host, 'foo.cloudfront.net'
   set :assets_protocol, :https
