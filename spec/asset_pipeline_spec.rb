@@ -51,7 +51,17 @@ describe Sinatra::AssetPipeline do
     end
 
     describe "assets_paths" do
-      it { expect(CustomApp.assets_paths).to eq %w(assets foo/bar) }
+      it { expect(CustomApp.assets_paths).to eq %w(assets foo/bar /some/path/to/a/third-party/gem) }
+
+      context 'sprockets assets paths' do
+        let(:sprockets_root_path) { CustomApp.sprockets.root }
+
+        it "returns two app specific assets paths and one absolute third party assets paths" do
+          expect(CustomApp.sprockets.paths).to include(File.join(sprockets_root_path, 'spec/assets'))
+          expect(CustomApp.sprockets.paths).to include(File.join(sprockets_root_path, 'spec/foo/bar'))
+          expect(CustomApp.sprockets.paths).to include('/some/path/to/a/third-party/gem')
+        end
+      end
     end
 
     describe "assets_host" do

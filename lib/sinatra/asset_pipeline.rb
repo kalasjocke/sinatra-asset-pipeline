@@ -22,7 +22,7 @@ module Sinatra
 
       app.configure do
         app.assets_paths.each do |path|
-          app.sprockets.append_path File.join(app.root, path)
+          app.sprockets.append_path(Pathname.new(path).absolute? ? path : File.join(app.root, path))
         end
 
         ::Sprockets::Helpers.configure do |config|
