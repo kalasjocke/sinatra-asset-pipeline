@@ -14,7 +14,7 @@ gem install sinatra-asset-pipeline
 Or, include it in your project's `Gemfile`:
 
 ```ruby
-gem 'sinatra-asset-pipeline', '~> 1.0'
+gem 'sinatra-asset-pipeline', '~> 2.2.0'
 ```
 
 # Usage
