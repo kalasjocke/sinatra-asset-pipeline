@@ -21,7 +21,7 @@ module Sinatra
       end
 
       def manifest
-        app ? Sprockets::Manifest.new(environment.index, app.assets_public_path) : super
+        app ? ::Sprockets::Manifest.new(environment.index, app.assets_public_path) : super
       end
 
       def define
