@@ -1,4 +1,4 @@
-Sinatra Asset Pipeline [![Build Status](https://travis-ci.org/kalasjocke/sinatra-asset-pipeline.svg?branch=master)](https://travis-ci.org/kalasjocke/sinatra-asset-pipeline) 
+Sinatra Asset Pipeline [![Build Status](https://github.com/kalasjocke/sinatra-asset-pipeline/actions/workflows/test.yml/badge.svg)](https://github.com/kalasjocke/sinatra-asset-pipeline/actions/workflows/test.yml)
 ======================
 
 An asset pipeline implementation for Sinatra based on [Sprockets](https://github.com/rails/sprockets). sinatra-asset-pipeline supports both compiling assets on the fly for development as well as precompiling assets for production. The design goal for sinatra-asset-pipeline is to provide good defaults for integrating your Sinatra application with Sprockets.
@@ -91,7 +91,7 @@ class App < Sinatra::Base
 
   # Register the AssetPipeline extension, make sure this goes after all customization
   register Sinatra::AssetPipeline
-  
+
   # If you need more environments
   set :precompiled_environments, %i(staging uat production)
 
